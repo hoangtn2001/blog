@@ -1,0 +1,155 @@
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.select {
+  margin-bottom: 50px;
+  padding: 10px 20px;
+  margin-left: 50px;
+  width: max-content;
+}
+
+.editor {
+  display: flex;
+  gap: 20px;
+  height: 700px;
+  position: relative;
+}
+
+.button,
+.addButton {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: transparent;
+  border: 1px solid var(--textColor);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.addButton {
+  border-color: #1a8917;
+}
+
+.add {
+  display: flex;
+  gap: 20px;
+  background-color: var(--bg);
+  position: absolute;
+  z-index: 999;
+  width: 100%;
+  left: 50px;
+}
+
+.input {
+  padding: 50px;
+  font-size: 64px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  color: var(--textColor);
+}
+
+.input::placeholder {
+  color: #b3b3b1;
+}
+
+.textArea {
+  width: 100%;
+}
+
+.publish {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  padding: 10px 20px;
+  border: none;
+  background-color: #1a8917;
+  color: white;
+  cursor: pointer;
+  border-radius: 20px;
+}
+.tiptapContainer {
+  width: calc(100% - 80px);
+}
+.tiptap {
+  width: 100%;
+  min-height: 200px;
+  border-left: 1px solid #ccc;
+  margin-top: 50px;
+}
+.tiptap .ProseMirror p.is-editor-empty::before {
+  content: attr(data-placeholder);
+  color: #b3b3b1;
+  font-size: 30px;
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+/* Nội dung */
+.tiptap .ProseMirror p {
+  font-size: 30px;
+  line-height: 1.8;
+  color: #242424;
+}
+
+/* Remove focus outline */
+.tiptap .ProseMirror:focus {
+  outline: none;
+}
+.tiptap:focus-within {
+  outline: none;
+}
+
+.tiptap [contenteditable="true"]:focus {
+  outline: none;
+}
+.tiptap p {
+  font-size: 30px;
+  line-height: 1.8;
+}
+
+.bubbleMenu {
+  display: flex;
+  gap: 6px;
+  background-color: #979696;
+  padding: 5px;
+  border-radius: 8px;
+}
+
+.bubbleMenu button {
+  border: none;
+  background: transparent;
+  color: #ccc;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 4px;
+}
+
+.bubbleMenu button:hover {
+  background: #2a2a2a;
+  color: white;
+}
+
+.bubbleMenu button.active {
+  background: #2a2a2a;
+  color: white;
+}
+.tiptap a {
+  color: #373aef;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.tiptap-image {
+  max-width: 30%;
+  width: 40px; /* chỉnh size preview */
+  height: auto;
+  display: block;
+  margin: 16px auto;
+  border-radius: 8px;
+}
