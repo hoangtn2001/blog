@@ -4,7 +4,9 @@ import Link from "next/link";
 import styles from "./categoryList.module.css";
 
 const getData = async () => {
-  const res = await fetch("/api/categories", {
+  const host = headers().get("host");
+  const protocol = process.env.NODE_ENV === "development" ? "http" : "https";
+  const res = await fetch(`${protocol}://${host}/api/categories`, {
     cache: "no-store",
   });
 

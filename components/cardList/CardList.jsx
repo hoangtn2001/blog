@@ -3,10 +3,15 @@ import Pagination from "../pagination/Pagination";
 import Card from "../card/Card";
 
 const getData = async (page, cat) => {
-  const res = await fetch(`/api/posts?page=${page}&cat=${cat || ""}`, {
-    cache: "no-store",
-    next: { revalidate: 0 },
-  });
+  const host = headers().get("host");
+  const protocol = process.env.NODE_ENV === "development" ? "http" : "https";
+  const res = await fetch(
+    `${protocol}://${host}/api/posts?page=${page}&cat=${cat || ""}`,
+    {
+      cache: "no-store",
+      next: { revalidate: 0 },
+    }
+  );
 
   if (!res.ok) {
     throw new Error("Failed");
