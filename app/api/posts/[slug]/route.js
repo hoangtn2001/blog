@@ -1,11 +1,8 @@
-import { NextResponse, NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 import prisma from "@/utils/prisma";
 
-export async function GET(
-  req: NextRequest,
-  context: { params: Promise<{ slug: string }> }
-) {
-  const { slug } = await context.params;
+export async function GET(req, { params }) {
+  const { slug } = params;
 
   try {
     const post = await prisma.post.findUnique({
@@ -27,7 +24,6 @@ export async function GET(
 
     return NextResponse.json(post);
   } catch (error) {
-    console.error(error);
     return NextResponse.json(
       { message: "Something went wrong" },
       { status: 500 }
