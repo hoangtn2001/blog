@@ -1,12 +1,16 @@
 import styles from "./cardList.module.css";
 import Pagination from "../pagination/Pagination";
 import Card from "../card/Card";
+import baseUrl from "../../utils/baseUrl";
 
 const getData = async (page, cat) => {
-  const res = await fetch(`/api/posts?page=${page}&cat=${cat || ""}`, {
-    cache: "no-store",
-    next: { revalidate: 0 },
-  });
+  const res = await fetch(
+    `${baseUrl}/api/posts?page=${page}&cat=${cat || ""}`,
+    {
+      cache: "no-store",
+      next: { revalidate: 0 },
+    }
+  );
 
   if (!res.ok) {
     throw new Error("Failed");

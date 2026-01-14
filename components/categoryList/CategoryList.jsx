@@ -2,9 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 
 import styles from "./categoryList.module.css";
+import baseUrl from "../../utils/baseUrl";
 
 const getData = async () => {
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL;
   const res = await fetch(`${baseUrl}/api/categories`, {
     cache: "no-store",
   });
