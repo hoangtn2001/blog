@@ -3,14 +3,10 @@ import Pagination from "../pagination/Pagination";
 import Card from "../card/Card";
 
 const getData = async (page, cat) => {
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL;
-  const res = await fetch(
-    `${baseUrl}/api/posts?page=${page}&cat=${cat || ""}`,
-    {
-      cache: "no-store",
-      next: { revalidate: 0 },
-    }
-  );
+  const res = await fetch(`/api/posts?page=${page}&cat=${cat || ""}`, {
+    cache: "no-store",
+    next: { revalidate: 0 },
+  });
 
   if (!res.ok) {
     throw new Error("Failed");

@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 import styles from "./categoryList.module.css";
-import { headers } from "next/headers";
 
 const getData = async () => {
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL;

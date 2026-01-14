@@ -2,10 +2,8 @@ import Image from "next/image";
 import styles from "./singlePage.module.css";
 import Menu from "../../../components/menu/Menu";
 import Comments from "../../../components/comments/Comments";
-import { headers } from "next/headers";
 const getData = async (slug) => {
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL;
-  const res = await fetch(`${baseUrl}/api/posts/${slug}`, {
+  const res = await fetch(`/api/posts/${slug}`, {
     cache: "no-store",
   });
 
