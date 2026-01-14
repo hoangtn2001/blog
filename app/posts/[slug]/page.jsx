@@ -2,7 +2,7 @@ import Image from "next/image";
 import styles from "./singlePage.module.css";
 import Menu from "../../../components/menu/Menu";
 import Comments from "../../../components/comments/Comments";
-import baseUrl from "@/utils/baseUrl";
+import baseUrl from "../../../utils/baseUrl";
 const getData = async (slug) => {
   const res = await fetch(`${baseUrl}/api/posts/${slug}`, {
     cache: "no-store",
