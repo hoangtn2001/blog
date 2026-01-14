@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import styles from "./categoryList.module.css";
+import { headers } from "next/headers";
 
 const getData = async () => {
   const host = headers().get("host");

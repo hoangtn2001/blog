@@ -1,6 +1,7 @@
 import styles from "./cardList.module.css";
 import Pagination from "../pagination/Pagination";
 import Card from "../card/Card";
+import { headers } from "next/headers";
 
 const getData = async (page, cat) => {
   const host = headers().get("host");

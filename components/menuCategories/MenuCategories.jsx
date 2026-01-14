@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import styles from "./menuCategories.module.css";
+import { headers } from "next/headers";
 
 const getData = async () => {
   const host = headers().get("host");

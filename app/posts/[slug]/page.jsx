@@ -2,6 +2,7 @@ import Image from "next/image";
 import styles from "./singlePage.module.css";
 import Menu from "../../../components/menu/Menu";
 import Comments from "../../../components/comments/Comments";
+import { headers } from "next/headers";
 const getData = async (slug) => {
   const host = headers().get("host");
   const protocol = process.env.NODE_ENV === "development" ? "http" : "https";
