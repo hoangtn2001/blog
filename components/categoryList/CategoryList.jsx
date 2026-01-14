@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import styles from "./categoryList.module.css";
-import baseUrl from "../../utils/baseUrl";
+import baseUrl from "../../app/baseUrl/baseUrl";
 
 const getData = async () => {
   const res = await fetch(`${baseUrl}/api/categories`, {

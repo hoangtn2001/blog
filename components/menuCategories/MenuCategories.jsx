@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import styles from "./menuCategories.module.css";
-import baseUrl from "../../utils/baseUrl";
+import baseUrl from "../../app/baseUrl/baseUrl";
 
 const getData = async () => {
   const res = await fetch(`${baseUrl}/api/categories`, {
