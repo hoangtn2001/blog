@@ -4,9 +4,8 @@ import styles from "./menuCategories.module.css";
 import { headers } from "next/headers";
 
 const getData = async () => {
-  const host = headers().get("host");
-  const protocol = process.env.NODE_ENV === "development" ? "http" : "https";
-  const res = await fetch(`${protocol}://${host}/api/categories`, {
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL;
+  const res = await fetch(`${baseUrl}/api/categories`, {
     cache: "no-store",
   });
 

@@ -1,13 +1,11 @@
 import styles from "./cardList.module.css";
 import Pagination from "../pagination/Pagination";
 import Card from "../card/Card";
-import { headers } from "next/headers";
 
 const getData = async (page, cat) => {
-  const host = headers().get("host");
-  const protocol = process.env.NODE_ENV === "development" ? "http" : "https";
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL;
   const res = await fetch(
-    `${protocol}://${host}/api/posts?page=${page}&cat=${cat || ""}`,
+    `${baseUrl}/api/posts?page=${page}&cat=${cat || ""}`,
     {
       cache: "no-store",
       next: { revalidate: 0 },

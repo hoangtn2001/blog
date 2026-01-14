@@ -4,9 +4,8 @@ import Menu from "../../../components/menu/Menu";
 import Comments from "../../../components/comments/Comments";
 import { headers } from "next/headers";
 const getData = async (slug) => {
-  const host = headers().get("host");
-  const protocol = process.env.NODE_ENV === "development" ? "http" : "https";
-  const res = await fetch(`${protocol}://${host}/api/posts/${slug}`, {
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL;
+  const res = await fetch(`${baseUrl}/api/posts/${slug}`, {
     cache: "no-store",
   });
 
