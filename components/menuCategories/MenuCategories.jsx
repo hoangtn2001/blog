@@ -1,22 +1,31 @@
+"use client";
 import Link from "next/link";
 
 import styles from "./menuCategories.module.css";
-import baseUrl from "../../app/baseUrl/baseUrl";
+import { useState, useEffect } from "react";
 
-const getData = async () => {
-  const res = await fetch(`${baseUrl}/api/categories`, {
-    cache: "no-store",
-  });
+const MenuCategories = () => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
-  if (!res.ok) {
-    throw new Error("Failed");
-  }
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch("/api/categories");
+        if (!res.ok) throw new Error("Failed");
+        const json = await res.json();
+        setData(json);
+      } catch (err) {
+        console.error(err);
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  return res.json();
-};
-
-const MenuCategories = async () => {
-  const data = await getData();
+    fetchData();
+  }, []);
   const {
     categoryList,
     categoryItem,

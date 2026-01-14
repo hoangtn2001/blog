@@ -1,21 +1,38 @@
+"use client";
 import Image from "next/image";
 import styles from "./singlePage.module.css";
 import Menu from "../../../components/menu/Menu";
 import Comments from "../../../components/comments/Comments";
-import baseUrl from "../../baseUrl/baseUrl";
-const getData = async (slug) => {
-  const res = await fetch(`${baseUrl}/api/posts/${slug}`, {
-    cache: "no-store",
-  });
+import { useState, useEffect } from "react";
+import { useParams } from "next/navigation";
 
-  if (!res.ok) {
-    throw new Error("Failed");
-  }
+const SinglePage = () => {
+  const [data, setData] = useState([]);
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  return res.json();
-};
+  const { slug } = useParams();
+  console.log(slug);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch(`/api/posts/${slug}`);
 
-const SinglePage = async ({ params }) => {
+        if (!res.ok) throw new Error("Failed");
+
+        const data = await res.json();
+        setData(data);
+      } catch (err) {
+        console.error(err);
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [slug]);
+
   const {
     container,
     infoContainer,
@@ -34,9 +51,6 @@ const SinglePage = async ({ params }) => {
     username,
     comment,
   } = styles;
-  const { slug } = await params;
-
-  const data = await getData(slug);
 
   return (
     <div className={container}>

@@ -1,26 +1,36 @@
+"use client";
 import styles from "./cardList.module.css";
 import Pagination from "../pagination/Pagination";
 import Card from "../card/Card";
-import baseUrl from "../../app/baseUrl/baseUrl";
+import { useState, useEffect } from "react";
 
-const getData = async (page, cat) => {
-  const res = await fetch(
-    `${baseUrl}/api/posts?page=${page}&cat=${cat || ""}`,
-    {
-      cache: "no-store",
-      next: { revalidate: 0 },
-    }
-  );
+const CardList = ({ page, cat }) => {
+  const [posts, setPosts] = useState([]);
+  const [count, setCount] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
-  if (!res.ok) {
-    throw new Error("Failed");
-  }
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch(`/api/posts?page=${page}&cat=${cat || ""}`);
 
-  return res.json();
-};
+        if (!res.ok) throw new Error("Failed");
 
-const CardList = async ({ page, cat }) => {
-  const { posts, count } = await getData(page, cat);
+        const data = await res.json();
+        setPosts(data.posts);
+        setCount(data.count);
+      } catch (err) {
+        console.error(err);
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [page, cat]);
+
   const { container, title } = styles;
 
   const POST_PER_PAGE = 2;

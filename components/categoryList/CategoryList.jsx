@@ -1,24 +1,32 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 
 import styles from "./categoryList.module.css";
-import baseUrl from "../../app/baseUrl/baseUrl";
+import { useState, useEffect } from "react";
+const CategoryList = () => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
-const getData = async () => {
-  console.log(baseUrl);
-  const res = await fetch(`${baseUrl}/api/categories`, {
-    cache: "no-store",
-  });
-  console.log(res);
-  if (!res.ok) {
-    throw new Error("Failed");
-  }
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch("/api/categories");
+        if (!res.ok) throw new Error("Failed");
+        const json = await res.json();
+        setData(json);
+      } catch (err) {
+        console.error(err);
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  return res.json();
-};
+    fetchData();
+  }, []);
 
-const CategoryList = async () => {
-  const data = await getData();
   const { container, title, categories, category, image } = styles;
   return (
     <div className={container}>
