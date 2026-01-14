@@ -5,10 +5,11 @@ import styles from "./categoryList.module.css";
 import baseUrl from "../../app/baseUrl/baseUrl";
 
 const getData = async () => {
+  console.log(baseUrl);
   const res = await fetch(`${baseUrl}/api/categories`, {
     cache: "no-store",
   });
-
+  console.log(res);
   if (!res.ok) {
     throw new Error("Failed");
   }
