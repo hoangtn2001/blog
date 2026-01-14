@@ -1,11 +1,12 @@
-import prisma from "@/utils/prisma";
 import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+import prisma from "@/utils/prisma";
 
 export async function GET(
-  req: Request,
-  { params }: { params: { slug: string } }
+  req: NextRequest,
+  context: { params: Promise<{ slug: string }> }
 ) {
-  const { slug } = params;
+  const { slug } = await context.params;
 
   try {
     const post = await prisma.post.findUnique({
@@ -25,11 +26,11 @@ export async function GET(
       data: { views: post.views + 1 },
     });
 
-    return NextResponse.json(post, { status: 200 });
-  } catch (err) {
-    console.error("POST SLUG API ERROR:", err);
+    return NextResponse.json(post);
+  } catch (error) {
+    console.error(error);
     return NextResponse.json(
-      { message: "Something went wrong!" },
+      { message: "Something went wrong" },
       { status: 500 }
     );
   }
