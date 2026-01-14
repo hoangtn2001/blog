@@ -33,15 +33,6 @@ export const GET = async (req) => {
 };
 
 export const POST = async (req) => {
-  // const session = await getServerSession(authOptions);
-
-  // if (!session) {
-  //   return NextResponse.json(
-  //     { message: "Not Authenticated!" },
-  //     { status: 401 }
-  //   );
-  // }
-
   const body = await req.json();
   console.log(body);
 
